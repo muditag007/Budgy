@@ -41,16 +41,6 @@ class _NewCatState extends State<NewCat> {
     }
   }
 
-  _pickIcon() async {
-    IconData? icon = await FlutterIconPicker.showIconPicker(context,
-        iconPackModes: [IconPack.cupertino]);
-
-    _icon = Icon(icon);
-    setState(() {});
-
-    debugPrint('Picked Icon:  $_icon');
-  }
-
   @override
   void initState() {
     getCurrentUser();
