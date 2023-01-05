@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, unused_field, sized_box_for_whitespace
 
+import 'package:budgy1/pages/new_cat.dart';
 import 'package:budgy1/utils/budget_card.dart';
 import 'package:budgy1/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
@@ -85,23 +86,97 @@ class _ManageCatsState extends State<ManageCats> {
                   ),
                   Expanded(
                     child: ListView.builder(
-                      itemCount: catsUser.length,
+                      itemCount: catsUser.length + 1,
                       itemBuilder: ((context, index) {
-                        return Padding(
-                          padding: EdgeInsets.symmetric(
-                            vertical: 10,
-                          ),
-                          child: BudgetCard(
-                            press: false,
-                            amt: '100',
-                            bud: (catsUser[index]['budget']).toString(),
-                            col1: index % 2 == 0 ? korange : klightblue,
-                            col2: index % 2 == 0 ? kdarkorange : kdarkblue,
-                            // icon: CupertinoIcons.paperplane,
-                            str: catsUser[index]['category'],
-                            total: '100',
-                          ),
-                        );
+                        return index < catsUser.length
+                            ? Padding(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 10,
+                                ),
+                                child: BudgetCard(
+                                  docid: catsUser[index]['docid'],
+                                  press: false,
+                                  amt: '100',
+                                  bud: (catsUser[index]['budget']).toString(),
+                                  col1: index % 2 == 0 ? korange : klightblue,
+                                  col2:
+                                      index % 2 == 0 ? kdarkorange : kdarkblue,
+                                  // icon: CupertinoIcons.paperplane,
+                                  str: catsUser[index]['category'],
+                                  total: '100',
+                                ),
+                              )
+                            : Padding(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 10,
+                                ),
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  onTap: () {
+                                    Navigator.pushNamed(context, NewCat.id);
+                                  },
+                                  child: Container(
+                                    height: 250,
+                                    width: 270,
+                                    decoration: BoxDecoration(
+                                      // color: klightblue,
+                                      // boxShadow: [
+                                      //   BoxShadow(
+                                      //     color: Colors.grey,
+                                      //     blurRadius: 1,
+                                      //     spreadRadius: 1,
+                                      //   ),
+                                      // ],
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(30),
+                                              topRight: Radius.circular(30),
+                                            ),
+                                            color: index % 2 == 0
+                                                ? korange
+                                                : klightblue,
+                                          ),
+                                          height: 100,
+                                          child: Center(
+                                            child: Text(
+                                              "Add a new Category!!",
+                                              style: TextStyle(
+                                                fontSize: 30,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          height: 150,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.only(
+                                              bottomLeft: Radius.circular(30),
+                                              bottomRight: Radius.circular(30),
+                                            ),
+                                            color: kwhite,
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              "Click here to create a Custom Category.",
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
                       }),
                     ),
                   ),

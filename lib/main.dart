@@ -4,7 +4,9 @@ import 'package:budgy1/pages/add_new.dart';
 import 'package:budgy1/pages/average_page.dart';
 import 'package:budgy1/pages/cat_detail.dart';
 import 'package:budgy1/pages/categories_page.dart';
+import 'package:budgy1/pages/create_profile.dart';
 import 'package:budgy1/pages/edit_cat.dart';
+import 'package:budgy1/pages/edit_profile.dart';
 import 'package:budgy1/pages/limit_page.dart';
 import 'package:budgy1/pages/limit_set_page.dart';
 import 'package:budgy1/pages/login_page.dart';
@@ -54,7 +56,9 @@ class MyApp extends StatelessWidget {
       routes: {
         // CatDetail.id:(context) => CatDetail(),
         NewCat.id:(context) => NewCat(),
-        EditCat.id:(context) => EditCat(),
+        // EditCat.id:(context) => EditCat(),
+        CreateProfile.id: (context) => CreateProfile(),
+        EditProfile.id: (context) => EditProfile(),
         ProfilePage.id:(context) => ProfilePage(),
         ManageCats.id:(context) => ManageCats(),
         LoginPage.id:(context) => LoginPage(),

@@ -20,6 +20,7 @@ class CatDetail extends StatefulWidget {
   final String budget;
   final Color col1;
   final Color col2;
+  final String docid;
 
   const CatDetail(
       {super.key,
@@ -28,7 +29,7 @@ class CatDetail extends StatefulWidget {
       required this.budget,
       required this.col1,
       required this.col2,
-      required this.total});
+      required this.total, required this.docid});
   static String id = 'catdetail';
 
   @override
@@ -195,7 +196,12 @@ class _CatDetailState extends State<CatDetail> {
                             color: Colors.transparent,
                             child: InkWell(
                               onTap: () {
-                                Navigator.pushNamed(context, EditCat.id);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => EditCat(docid: widget.docid,),
+                                  ),
+                                );
                               },
                               child: Container(
                                 height: 60,

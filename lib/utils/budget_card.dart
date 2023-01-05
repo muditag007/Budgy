@@ -19,6 +19,7 @@ class BudgetCard extends StatelessWidget {
   final String total;
   final String bud;
   final bool press;
+  final String docid;
   const BudgetCard({
     required this.amt,
     required this.bud,
@@ -27,6 +28,7 @@ class BudgetCard extends StatelessWidget {
     required this.str,
     required this.total,
     required this.press,
+    required this.docid,
   });
 
   @override
@@ -47,6 +49,7 @@ class BudgetCard extends StatelessWidget {
                       col1: col1,
                       col2: col2,
                       total: total,
+                      docid: docid,
                     ),
                   ),
                 )
@@ -112,26 +115,34 @@ class BudgetCard extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(context, EditCat.id);
-                          },
-                          child: Container(
-                            height: 60,
-                            width: 60,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              color: col2,
-                            ),
-                            child: Icon(
-                              CupertinoIcons.pen,
-                              size: 40,
+                      if (str != 'UnCategorised')
+                        Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => EditCat(
+                                    docid: docid,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              height: 60,
+                              width: 60,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                color: col2,
+                              ),
+                              child: Icon(
+                                CupertinoIcons.pen,
+                                size: 40,
+                              ),
                             ),
                           ),
                         ),
-                      ),
                     ],
                   ),
                 ),

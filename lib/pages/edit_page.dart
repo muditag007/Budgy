@@ -34,6 +34,7 @@ class _EditPageState extends State<EditPage> {
   final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
   late User loggedInUser;
+  int count = 0;
 
   void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
     dueDate = args.value;
@@ -57,7 +58,7 @@ class _EditPageState extends State<EditPage> {
     var docs = querySnapshot.docs;
     var categorySorted = [];
     for (var cat in docs) {
-      if(cat['user']==loggedInUser.email){
+      if (cat['user'] == loggedInUser.email) {
         categorySorted.add(cat['category'].toString());
       }
     }
@@ -69,51 +70,64 @@ class _EditPageState extends State<EditPage> {
   }
 
   Future<List> _initialization() async {
-    await _firestore
-        .collection('transactions')
-        .doc(widget.docid)
-        .get()
-        .then((value) => {_titleControl.text = value['payee']});
-    await _firestore
-        .collection('transactions')
-        .doc(widget.docid)
-        .get()
-        .then((value) => {_amountControl.text = value['amount'].toString()});
-    await _firestore
-        .collection('transactions')
-        .doc(widget.docid)
-        .get()
-        .then((value) => {dueDate = value['date'].toDate()});
-    await _firestore
-        .collection('transactions')
-        .doc(widget.docid)
-        .get()
-        .then((value) => {dropdownValue = value['category']});
-    await _firestore
-        .collection('transactions')
-        .doc(widget.docid)
-        .get()
-        .then((value) => {credit = value['credited']});
-    payee = _titleControl.text;
-    await _firestore
-        .collection('transactions')
-        .doc(widget.docid)
-        .get()
-        .then((value) => {amount = value['amount']});
-    print(dueDate);
-    print(amount);
-    print(credit);
-    print(dropdownValue);
-    print(_amountControl.text);
-    print(_titleControl.text);
-    List temp = [];
-    temp.add(dueDate);
-    temp.add(amount);
-    temp.add(credit);
-    temp.add(dropdownValue);
-    temp.add(_amountControl.text);
-    temp.add(_titleControl.text);
-    return temp;
+    if (count == 0) {
+      await _firestore
+          .collection('transactions')
+          .doc(widget.docid)
+          .get()
+          .then((value) => {_titleControl.text = value['payee']});
+      await _firestore
+          .collection('transactions')
+          .doc(widget.docid)
+          .get()
+          .then((value) => {_amountControl.text = value['amount'].toString()});
+      await _firestore
+          .collection('transactions')
+          .doc(widget.docid)
+          .get()
+          .then((value) => {dueDate = value['date'].toDate()});
+      await _firestore
+          .collection('transactions')
+          .doc(widget.docid)
+          .get()
+          .then((value) => {dropdownValue = value['category']});
+      await _firestore
+          .collection('transactions')
+          .doc(widget.docid)
+          .get()
+          .then((value) => {credit = value['credited']});
+      payee = _titleControl.text;
+      await _firestore
+          .collection('transactions')
+          .doc(widget.docid)
+          .get()
+          .then((value) => {amount = value['amount']});
+      print(dueDate);
+      print(amount);
+      print(credit);
+      print(dropdownValue);
+      print(_amountControl.text);
+      print(_titleControl.text);
+      print('count $count');
+      List temp = [];
+      temp.add(dueDate);
+      temp.add(amount);
+      temp.add(credit);
+      temp.add(dropdownValue);
+      temp.add(_amountControl.text);
+      temp.add(_titleControl.text);
+      count++;
+      return temp;
+    } else {
+      List temp = [];
+      temp.add(dueDate);
+      temp.add(amount);
+      temp.add(credit);
+      temp.add(dropdownValue);
+      temp.add(_amountControl.text);
+      temp.add(_titleControl.text);
+      return temp;
+    }
   }
 
   void _method() async {

@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, unused_field, use_build_context_synchronously, unnecessary_null_comparison, avoid_print, sized_box_for_whitespace, avoid_unnecessary_containers
 
+import 'package:budgy1/pages/create_profile.dart';
 import 'package:budgy1/pages/newui.dart';
 import 'package:budgy1/pages/opening_page.dart';
 import 'package:budgy1/utils/constants.dart';
@@ -214,7 +215,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             await _auth.createUserWithEmailAndPassword(
                                 email: email, password: password);
                         if (newUser != null) {
-                          Navigator.pushNamed(context, OpeningPage.id);
+                          Navigator.pushNamed(context, CreateProfile.id);
                         }
                         setState(() {
                           spinner = false;
